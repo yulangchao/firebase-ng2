@@ -1,0 +1,36 @@
+<h3 class="text-center">Warehouse App</h3>
+<div class="row">
+<div class="col-sm-4 col-sm-offset-4 alert alert-warning text-center" role="alert" *ngIf="!islog()" >
+  <strong>Warning!</strong> You have to log in to see contents!
+</div>
+<div class="col-sm-4"></div>
+</div>
+<br>
+  <div class="container homepage" *ngIf="islog()">
+
+  <br>
+  <div class="row">
+    <div class="col-sm-4"> </div>
+    <div class="col-sm-4 text-center"><a routerLink="/item"><img src="../../assets/img/items_final.jpg"><h5 class="text-center">{{ 'MENU.ITEM' | translate }}</h5></a></div>
+    <div class="col-sm-4"> </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-5"><a class="pull-right" routerLink="/ruku"><img src="../../assets/img/ruku_final.jpg"><h5 class="text-center">{{ 'MENU.RUKU' | translate }}</h5></a></div>
+    <div class="col-sm-2"> </div>
+    <div class="col-sm-5"><a class="pull-left" routerLink="/chuku"><img src="../../assets/img/chuku_final.jpg"><h5 class="text-center">{{ 'MENU.CHUKU' | translate }}</h5></a></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4"> </div>
+    <div class="col-sm-4 text-center"><a routerLink="/summary"><img src="../../assets/img/summary_final.jpg"><h5 class="text-center">{{ 'MENU.SUMMARY' | translate }}</h5></a></div>
+    <div class="col-sm-4"> </div>
+  </div>
+</div>
+<br>
+<br>
+<div class="text-center">
+  This is the app for the warehouse database.
+  <br>Using Angular 4.0 + TypeScript 2.x + passport.js + mongodb + node.js + express + sass
+  <br>My Email: Richardyych@gmail.com
+  <div class="clearfix"></div>
+  <br>
+</div>

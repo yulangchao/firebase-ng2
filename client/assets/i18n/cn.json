@@ -1,0 +1,30 @@
+{
+  "HOME": {
+    "TITLE": "仓库系统",
+    "SELECT": "语言"
+  },
+  "MENU": {
+    "HOME": "主页",
+    "ABOUT": "关于",
+    "ITEM": "商品",
+    "RUKU": "入库",
+    "CHUKU": "出库",
+    "SUMMARY": "摘要",
+    "CHAT": "聊天",
+    "LOGOUT": "登出",
+    "LOGIN": "登录",
+    "SIGNUP": "注册"    
+  },
+  "ITEM": {
+    "TITLE": "商品管理",
+    "DISPLAY": "显示",
+    "ADD": "加入商品",
+    "FILTER": "商品筛选",
+    "NAME": "商品名称",
+    "PRICE": "成本价格",
+    "SALEPRICE": "销售价格",
+    "NOTE": "备注",
+    "EDIT": "编辑",
+    "DELETE": "删除" 
+  }
+}

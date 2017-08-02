@@ -1,0 +1,290 @@
+<div class="container">
+  <div class="row">
+
+
+    <div class="col-md-12">
+
+      <h4>Stock Out</h4>
+      <app-toast [message]="toast.message"></app-toast>
+<!-- data-bind to the input element; store value in yourName -->
+                          <select  class="filter form-control col-sm-4" [(ngModel)]="shows">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>50</option>
+                            <option [attr.value]="chukus.length">All</option>
+                          </select>
+                                                <label class="display-lable">Display:</label>
+                          
+
+
+      <div class="table table-responsive" mychuku>
+                <p data-placement="top" data-toggle="tooltip" title="Add">
+                  <button class="btn btn-primary btn-sm" [disabled]="!isadmin()" data-title="Add" data-toggle="modal" data-target="#add">Add</button>
+                </p>
+        <p>Total: {{a}}</p>
+<!--filter-->
+        <div class="filter-input"><p> Filter by Product Name or Client:</p> <input name="filter" type="text" class="form-control input-md" [(ngModel)]="filter"></div>
+<!--loading-->
+     
+        <div class="card text-center" *ngIf="isLoading">
+          <h4 class="card-header">Loading...</h4>
+          <div class="card-block text-xs-center">
+            <i class="fa fa-circle-o-notch fa-spin fa-3x"></i>
+          </div>
+        </div>
+        <table *ngIf="!isLoading" id="mytable" class="table table-bordered table-hover table-striped">
+
+          <thead>
+            <th>Date</th>
+            <th>Client</th>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Amount</th>
+            <th>Ship￥</th>
+            <th>Subtotal</th>
+            <th>Note</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </thead>
+          <tbody *ngFor="let chuku of chukus.slice(((chukus.length-shows)<0 ? 0 : (chukus.length-shows)),chukus.length).reverse()">
+
+            <tr *ngIf="chuku.name.indexOf(filter) >= 0 || chuku.user.indexOf(filter) >= 0">
+              <td>{{chuku.date}}</td>
+              <td>{{chuku.user}}</td>
+              <td>{{chuku.name}}</td>
+              <td>{{chuku.price}}</td>
+              <td>{{chuku.number}}</td>
+              <td>{{chuku.kuaidi}}</td>
+              <td>{{chuku.number*chuku.price - chuku.kuaidi}}</td>
+              <td>{{chuku.text}}</td>
+              <td>
+                <p data-placement="top" data-toggle="tooltip" title="Edit">
+                  <button (click)="updateForm(chuku)" class="btn btn-primary btn-sm" data-title="Edit" [disabled]="!isadmin()" data-toggle="modal" [attr.data-target]="'#edit-' + chuku._id"><span class="glyphicon glyphicon-pencil"></span></button>
+                </p>
+              </td>
+              <td>
+                <p data-placement="top" data-toggle="tooltip" title="Delete">
+                  <button class="btn btn-danger btn-sm" data-title="Delete" [disabled]="!isadmin()" data-toggle="modal" [attr.data-target]="'#delete-' + chuku._id"><span class="glyphicon glyphicon-trash"></span></button>
+                </p>
+              </td>
+            </tr>
+
+
+            <!--for delete-->
+            <div [attr.id]="'delete-' + chuku._id" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                    <h4 class="modal-title custom_align" id="Heading">Delete this entry</h4>
+                  </div>
+                  <div class="modal-body">
+
+                    <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Record {{chuku.name}}?</div>
+
+                  </div>
+                  <div class="modal-footer ">
+                    <button type="button" (click)="deleteChuku(chuku._id)" data-dismiss="modal" class="btn btn-success"><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+                  </div>
+                </div>
+                <!-- /.modal-content -->
+              </div>
+              <!-- /.modal-dialog -->
+            </div>
+
+            <!--for edit-->
+            <div class="modal fade" [attr.id]="'edit-' + chuku._id" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                    <h4 class="modal-title custom_align" id="Heading">Edit this entry</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form class="form-horizontal" >
+
+                      <div class="form-group">
+                        <label class="col-md-4 control-label" for="Date ">Date</label>
+                        <div class="col-md-6">
+                          <input id="Date " name="Date " type="Date" placeholder="Date " class="form-control input-md" [(ngModel)]="chukuData.date" required="">
+
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="col-md-4 control-label" for="Client">Client</label>
+                        <div class="col-md-6">
+                          <input id="Client" name="Client" type="text" placeholder="Client" class="form-control input-md" [(ngModel)]="chukuData.user" required="">
+
+                        </div>
+                      </div>
+                      <!-- Text input-->
+                      <div class="form-group">
+                        <label class="col-md-4 control-label" for="Product Name">Product Name</label>
+                        <div class="col-md-6">
+                          <select #t class="form-control" name="select-1"
+                                  (change)="chukuData.price = t.value.split('+')[0];" [(ngModel)]="chukuData.name">
+                            <option *ngFor="let item of items;" value="{{item.price}}+{{item.name}}">
+                              {{item.name}}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <!-- Text input-->
+                      <div class="form-group">
+                        <label class="col-md-4 control-label" for="Price">Price</label>
+                        <div class="col-md-6">
+                          <input id="Price" name="Price" type="text" class="form-control input-md" [(ngModel)]="chukuData.price" required="">
+
+                        </div>
+                      </div>
+
+                      <!-- Text input-->
+                      <div class="form-group">
+                        <label class="col-md-4 control-label" for="Amount">Amount</label>
+                        <div class="col-md-6">
+                          <input id="Amount" name="Amount" type="text" placeholder="Amount" class="form-control input-md" [(ngModel)]="chukuData.number" required="">
+
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-md-4 control-label" for="Kuaidi ">Kuaidi</label>
+                        <div class="col-md-6">
+                          <input id="Kuaidi " name="Kuaidi " type="text" placeholder="Kuaidi " class="form-control input-md" [(ngModel)]="chukuData.kuaidi" required="">
+
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-md-4 control-label" for="Notes ">Notes</label>
+                        <div class="col-md-6">
+                          <input id="Notes " name="Notes " type="text" placeholder="Notes " class="form-control input-md" [(ngModel)]="chukuData.text" required="">
+
+                        </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="col-md-4 control-label" for=""></label>
+                        <div class="col-md-4">
+                          <button type="submit" data-dismiss="modal" name="" (click)="updateChuku(chuku)" class="btn btn-success">Update</button>
+                        </div>
+                      </div>
+
+
+                    </form>
+
+                  </div>
+                </div>
+                <!-- /.modal-content -->
+              </div>
+              <!-- /.modal-dialog -->
+            </div>
+            <!--done-->
+          </tbody>
+
+        </table>
+
+        <div class="clearfix"></div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+                  <div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="add" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                          <h4 class="modal-title custom_align" id="Heading">Add this entry</h4>
+                        </div>
+                        <div class="modal-body">
+                              <form class="form-horizontal" >
+
+                              <div class="form-group">
+                                <label class="col-md-4 control-label" for="Date ">Date</label>
+                                <div class="col-md-6">
+                                <input id="Date " name="Date " type="Date" placeholder="Date " class="form-control input-md" [(ngModel)]="chukuData.date" required="">
+
+                                </div>
+                              </div>
+                              
+                              <div class="form-group">
+                                <label class="col-md-4 control-label" for="Client">Client</label>
+                                <div class="col-md-6">
+                                <input id="Client" name="Client" type="text" placeholder="Client" class="form-control input-md" [(ngModel)]="chukuData.user" required="">
+
+                                </div>
+                              </div>
+                              <!-- Text input-->
+                              <div class="form-group">
+                                <label class="col-md-4 control-label" for="Product Name">Product Name</label>
+                                <div class="col-md-6">
+                                  <select #t class="form-control" name="select-2"
+                                      (change)="chukuData.price = t.value.split('+')[0];" [(ngModel)]="chukuData.name">
+                                    <option *ngFor="let item of items;" value="{{item.saleprice}}+{{item.name}}">
+                                      {{item.name}}
+                                    </option>
+                                  </select>
+                                </div>
+                              </div>
+
+                              <!-- Text input-->
+                              <div class="form-group">
+                                <label class="col-md-4 control-label" for="Price">Price</label>
+                                <div class="col-md-6">
+                                <input id="Price" name="Price" type="text" class="form-control input-md" [(ngModel)]="chukuData.price" required="">
+
+                                </div>
+                              </div>
+
+                              <!-- Text input-->
+                              <div class="form-group">
+                                <label class="col-md-4 control-label" for="Amount">Amount</label>
+                                <div class="col-md-6">
+                                <input id="Amount" name="Amount" type="text" placeholder="Amount" class="form-control input-md" [(ngModel)]="chukuData.number" required="">
+
+                                </div>
+                              </div>
+
+                              <div class="form-group">
+                                <label class="col-md-4 control-label" for="Kuaidi ">Kuaidi</label>
+                                <div class="col-md-6">
+                                <input id="Kuaidi " name="Kuaidi " type="text" placeholder="Kuaidi " class="form-control input-md" [(ngModel)]="chukuData.kuaidi" required="">
+
+                                </div>
+                              </div>
+
+                              <div class="form-group">
+                                <label class="col-md-4 control-label" for="Notes ">Notes</label>
+                                <div class="col-md-6">
+                                <input id="Notes " name="Notes " type="text" placeholder="Notes " class="form-control input-md" [(ngModel)]="chukuData.text" required="">
+
+                                </div>
+                              </div>
+
+                              <!-- Text input-->
+
+
+
+                              <!-- Button -->
+                              <div class="form-group">
+                                <label class="col-md-4 control-label" for=""></label>
+                                <div class="col-md-4">
+                                  <button type="submit" data-dismiss="modal" name="" (click)="createChuku()" class="btn btn-success">Add</button>
+                                </div>
+                              </div>
+
+
+                              </form>
+
+                        </div>
+                      </div>
+                      <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                  </div>

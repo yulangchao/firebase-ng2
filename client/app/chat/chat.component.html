@@ -1,0 +1,70 @@
+<!--<div class="container chat-total">
+        <app-toast [message]="toast.message"></app-toast>
+ <ul *ngFor="let u of user">
+    <li>{{u}}</li>
+ </ul>-->
+  <!--<app-toast [message]="toast.message"></app-toast>-->
+  <header id="chat-header" class="row panel-heading">
+      Chat Web
+      <a class="chat-home" routerLink="/"><i class="fa fa-home pull-right"></i></a>
+      <div class="dropdown pull-right online-user visible-xs">
+        <a class="dropdown-toggle" type="button" data-toggle="dropdown" href="#">
+        Online {{users.length}}<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li *ngFor="let user of users | async; let i = index"><a>{{user.local.name}}</a></li>
+        </ul>
+      </div>
+  </header>
+  <!-- TODO LIST -->
+  <div id="todo-list"  chat-body class="row panel-body">
+      <ul class="col-sm-2 hidden-xs userlist">
+<li  id="all" (click)="refresh($event)" class="row"> <img id="all" class="col-sm-6" src="http://bootdey.com/img/Content/user5.jpg" alt=""><p id="all" class="col-sm-6">all<br>chat</p></li>
+          <li  id="{{user._id}}" (click)="refresh($event)" class="row" *ngFor="let user of users | async; let i = index"> <img id="{{user._id}}" class="col-sm-6" src="http://bootdey.com/img/Content/user_{{i+1}}.jpg" alt=""><p id="{{user._id}}" class="col-sm-6">{{user.local.name}}<br>admin</p></li>
+
+      </ul>
+      <div class="col-sm-10 col-xs-12"  #scrollMe id="chatlist"  angular2-auto-scroll  lock-y-offset="10" observe-attributes>
+
+          <!-- LOOP OVER THE chats IN $scope.chats -->
+          <ul class="chat">
+          <div class="chatbox col-sm-12" [ngClass]="{'pull-right': chatData.name == chat.name, 'pull-left' : chatData.name != chat.name }" *ngFor="let chat of chats | async">
+                  <!--<p class="time col-sm-3 col-xs-12">{{chat.date.slice(4,chat.date.length)}}</p>-->
+              <!--<div class="col-sm-9 col-xs-12"><p class="content"><strong>{{ chat.name}}: </strong><span>{{ chat.text }}</span></p></div>-->
+              <li class="clearfix" [ngClass]="{'pull-right': chatData.name == chat.name, 'pull-left' : chatData.name != chat.name }">
+                  <span class="chat-img" [ngClass]="{'pull-right': chatData.name == chat.name, 'pull-left' : chatData.name != chat.name }">
+                            <img src="http://placehold.it/50/{{ chatData.name == chat.name ?  '55C1E7' :'FA6F57'}}/fff&text={{chat.name.substr(0,3)}}" alt="User Avatar" class="img-circle" />
+                   </span>
+                  <div class="chat-body clearfix ">
+
+                      <div class="header">
+                          <small class="text-muted" [ngClass]="{'pull-right': chatData.name == chat.name, 'pull-left' : chatData.name != chat.name }"><strong>{{chat.name}}</strong><span class="glyphicon glyphicon-time"></span>{{chat.date}}</small>
+                      </div>
+                      <p >
+                          {{chat.text}}
+                      </p>
+                  </div>
+              </li>
+          </div>
+          </ul>
+
+      </div>
+  </div>
+
+  <!-- FORM TO CREATE chats -->
+
+   <footer id="todo-form" class="row panel-footer">
+      <div class=" text-center">
+          <form>
+              <div class="form-group chat-add">
+                  <!-- BIND THIS VALUE TO todoData.text IN ANGULAR -->
+                  <input name="chat" type="text" class="form-control input-md text-center chat-content" placeholder="I am a developer" [(ngModel)]="chatData.text" required>
+
+              <!-- createToDo() WILL CREATE NEW chats -->
+              <span class="input-group-btn">
+                  <button type="submit" class="btn btn-primary btn-md"(click)="send()">Send</button>
+              </span>
+              </div>
+          </form>
+      </div>
+  </footer>
+
+<!--</div>-->

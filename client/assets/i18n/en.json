@@ -1,0 +1,32 @@
+{
+  "HOME": {
+    "TITLE": "WareHouse System",
+    "SELECT": "Language"
+  },
+  "MENU": {
+    "HOME": "Home",
+    "ABOUT": "About",
+    "ITEM": "Product",
+    "RUKU": "Stock In",
+    "CHUKU": "Stock Out",
+    "SUMMARY": "Summary",
+    "CHAT": "Chat",
+    "LOGOUT": "Log Out",
+    "LOGIN": "Login",
+    "SIGNUP": "Sign Up" 
+  },
+  "ITEM": {
+    "TITLE": "Product Management",
+    "DISPLAY": "Display",
+    "ADD": "Add Product",
+    "FILTER": "Filter by Name",
+    "NAME": "Product Name",
+    "PRICE": "Price",
+    "SALEPRICE": "Sale Price",
+    "NOTE": "Note",
+    "EDIT": "Edit",
+    "DELETE": "Delete" 
+  }
+  
+
+}
