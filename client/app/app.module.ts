@@ -12,7 +12,7 @@ import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-
+import { MomentModule } from 'angular2-moment';
 //component
 
 
@@ -68,6 +68,7 @@ export function HttpLoaderFactory(http: Http) {
   ],
   imports: [
     AppRoutingModule,
+    MomentModule,
     SharedModule,
     BrowserModule,
     HttpModule,
