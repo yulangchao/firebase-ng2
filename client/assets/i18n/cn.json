@@ -1,6 +1,6 @@
 {
   "HOME": {
-    "TITLE": "仓库系统",
+    "TITLE": "Richard's App",
     "SELECT": "语言"
   },
   "MENU": {
@@ -13,7 +13,7 @@
     "CHAT": "聊天",
     "LOGOUT": "登出",
     "LOGIN": "登录",
-    "SIGNUP": "注册"    
+    "SIGNUP": "注册"
   },
   "ITEM": {
     "TITLE": "商品管理",
@@ -25,6 +25,6 @@
     "SALEPRICE": "销售价格",
     "NOTE": "备注",
     "EDIT": "编辑",
-    "DELETE": "删除" 
+    "DELETE": "删除"
   }
 }

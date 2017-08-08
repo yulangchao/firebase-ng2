@@ -28,6 +28,6 @@ export class AppComponent {
     }
 
     isChat(){
-      return window.location.pathname === '/chat' || window.location.pathname === '/signin' || window.location.pathname === '/signup';
+      return window.location.pathname === '/chat';
     }
  }

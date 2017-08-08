@@ -76,7 +76,7 @@
     border-bottom: 1px dotted #B3A9A9;
 }
 
-#myNavbar{
+.userlist{
   margin-top: 60px !important;
 }
 .chat li.left .chat-body
@@ -89,7 +89,10 @@
     margin-right: 60px;
 }
 
-
+.chat-image{
+  width: 80px !important;
+  margin-left: 20px;
+}
 .chat li .chat-body p
 {
     margin: 0;
@@ -127,4 +130,18 @@
 
 #chat-page{
   padding: 0px !important;
+}
+
+.online-user{
+      height: 50px;
+    padding-top: 20px;
+    padding-right: 20px;
+}
+.roomname{
+    position: absolute;
+    left: 45%;
+    height: 50px;
+    padding-top: 12px;
+    font-size: 18px;
+    color: white;
 }

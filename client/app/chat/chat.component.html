@@ -1,25 +1,30 @@
 
 <nav class="navbar navbar-fixed-top" id="chatheader" style="background-color: #428bca;border-color: #428bca;">
   <div class="container-fluid">
+          <div class="roomname">
+               {{roomname}}
+      </div>
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span style="color:white" class="glyphicon glyphicon-chevron-down"></span>
-      </button>
+      <div class="dropdown pull-right online-user visible-xs">
+        <a class="dropdown-toggle" type="button" data-toggle="dropdown" href="#">
+        Online<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li id="all" (click)="refresh($event); roomname='ALL'"><a id="all">ALL</a></li>
+          <li [id]="user._id" (click)="refresh($event); roomname=user.local.name" *ngFor="let user of users  | async"><a [id]="user._id">{{user.local.name}}</a></li>
+        </ul>
+      </div>
       <a class="navbar-brand"href="#" style="color:white">tets</a>
     </div>
   </div>
 </nav>
 
 <div class="row">
-            <div class="col-md-3 col-sm-3 col-xs-0">
-                <div class="collapse navbar-collapse" id="myNavbar">
-                  <ul class="nav navbar-nav">
-                      <li style="float: none !important" id="all" (click)="refresh($event)" class="clearfix">All</li>
-                      <li style="float: none !important" id="{{user._id}}" (click)="refresh($event)" class="clearfix" *ngFor="let user of users | async">{{user.local.name}}</li>
-                  </ul>
-                </div>
-            </div>
-            <div class="col-md-9 col-sm-9 col-xs-12">
+            <ul class="col-md-2 col-sm-2 hidden-xs userlist">
+                <li class="row" (click)="refresh($event); roomname='ALL'" id="all"> <img id="all" class="col-sm-6 chat-image" src="http://bootdey.com/img/Content/user_5.jpg" alt=""><p id="all" class="col-sm-6">ALL<br></p></li>
+                <li class="row" (click)="refresh($event); roomname=user.local.name" *ngFor="let user of users  | async; let i = index" [id]="user._id"> <img [id]="user._id" class="col-sm-6 chat-image" src="http://bootdey.com/img/Content/user_{{(i+1)%6}}.jpg" alt=""><p [id]="user._id" class="col-sm-6">{{user.local.name}}<br>admin</p></li>
+
+            </ul>
+            <div class="col-md-10 col-sm-10 col-xs-12">
                 <div class="panel-body">
                     <ul class="chat">
                         <li class="clearfix" [ngClass]="{'right': chatData.name == chat.name, 'left' : chatData.name != chat.name }" *ngFor="let chat of chats | async">

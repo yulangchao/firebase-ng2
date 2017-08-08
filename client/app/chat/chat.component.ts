@@ -21,6 +21,7 @@ export class ChatComponent {
    date: 0,
    text: ''
   };
+  roomname: any = 'ALL';
   constructor(public router: Router, public chatService: ChatService) {
      //chatService.chats.child(this.currentuser._id+'-my').push({name:'yyc'});
      this.room = 'all';
@@ -40,6 +41,7 @@ export class ChatComponent {
 
   refresh(event) {
     let target = event.target || event.srcElement || event.currentTarget;
+    console.log(target);
     let id = target.attributes.id.value;
     console.log(id);
     this.room = (this.currentuser._id < id ? (this.currentuser._id+'-'+id) : (id + '-' +this.currentuser._id));

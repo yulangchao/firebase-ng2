@@ -1,6 +1,6 @@
 {
   "HOME": {
-    "TITLE": "WareHouse System",
+    "TITLE": "Richard's App",
     "SELECT": "Language"
   },
   "MENU": {
@@ -13,7 +13,7 @@
     "CHAT": "Chat",
     "LOGOUT": "Log Out",
     "LOGIN": "Login",
-    "SIGNUP": "Sign Up" 
+    "SIGNUP": "Sign Up"
   },
   "ITEM": {
     "TITLE": "Product Management",
@@ -25,8 +25,8 @@
     "SALEPRICE": "Sale Price",
     "NOTE": "Note",
     "EDIT": "Edit",
-    "DELETE": "Delete" 
+    "DELETE": "Delete"
   }
-  
+
 
 }

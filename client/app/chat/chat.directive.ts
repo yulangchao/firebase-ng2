@@ -6,16 +6,16 @@ import * as $ from "jquery";
 export class ChatDirective {
     constructor(el: ElementRef) {
              setTimeout(() => {
-               $( '.panel-body').outerHeight( $( window ).outerHeight()-$( '#todo-form').outerHeight()-$( '#chatheader').outerHeight()-10);
-               $( '#myNavbar').outerHeight( $( window ).outerHeight() -$( '#todo-form').outerHeight()-$( '#chat-header').outerHeight()-10);
+               let height =  $( window ).outerHeight()-$( '#todo-form').outerHeight()-$( '#chatheader').outerHeight()-10;
+               $( '.panel-body').outerHeight( height);
+               $( '.userlist').outerHeight( height);
                $( ".chat-body p" ).css( "maxWidth", $( ".chat-body" ).innerWidth() );
             }, 0);
       $(window).resize(function(){
            setTimeout(() => {
-
-
-                $( '.panel-body').outerHeight( $( window ).outerHeight() -$( '#todo-form').outerHeight()-$( '#chatheader').outerHeight()-10);
-                $( '#myNavbar').outerHeight( $( window ).outerHeight() -$( '#todo-form').outerHeight()-$( '#chat-header').outerHeight()-10);
+               let height =  $( window ).outerHeight()-$( '#todo-form').outerHeight()-$( '#chatheader').outerHeight()-10;
+               $( '.panel-body').outerHeight( height);
+               $( '.userlist').outerHeight( height);
                 $( ".chat-body p" ).css( "maxWidth", $( ".chat-body" ).innerWidth() );
             }, 0);
       });
