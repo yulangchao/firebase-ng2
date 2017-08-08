@@ -44,9 +44,13 @@ export class ChatComponent {
     console.log(target);
     let id = target.attributes.id.value;
     console.log(id);
-    this.room = (this.currentuser._id < id ? (this.currentuser._id+'-'+id) : (id + '-' +this.currentuser._id));
+    if(id == 'all'){
+      this.room = 'all';
+    }else {
+      this.room = (this.currentuser._id < id ? (this.currentuser._id+'-'+id) : (id + '-' +this.currentuser._id));
+    }
     // this.chatService.chats.child(this.room).push({name:'test'});
-    this.chats = this.chatService.getData((id==='all') ?'all' : (this.room));
+    this.chats = this.chatService.getData(this.room);
   }
 
 

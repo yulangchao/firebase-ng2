@@ -7,7 +7,6 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import { JsonpModule, HttpModule, Http} from "@angular/http";
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import {NgxAutoScroll} from "ngx-auto-scroll/lib/ngx-auto-scroll.directive";
-import {Angular2AutoScroll} from "angular2-auto-scroll/lib/angular2-auto-scroll.directive";
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -63,7 +62,6 @@ export function HttpLoaderFactory(http: Http) {
     ChatComponent,
     NgxAutoScroll,
     ChatDirective,
-    Angular2AutoScroll,
     StockComponent
   ],
   imports: [
