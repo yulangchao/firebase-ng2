@@ -25,7 +25,7 @@
 
             </ul>
             <div class="col-md-10 col-sm-10 col-xs-12">
-                <div class="panel-body">
+                <div class="panel-body chat-panel-body" id=scrollMe>
                     <ul class="chat">
                         <li class="clearfix" [ngClass]="{'right': chatData.name == chat.name, 'left' : chatData.name != chat.name }" *ngFor="let chat of chats | async">
                         <span class="chat-img" [ngClass]="{'pull-right': chatData.name == chat.name, 'pull-left' : chatData.name != chat.name }">

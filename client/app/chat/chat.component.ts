@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild, ElementRef, OnInit, AfterViewChecked} from '@angular/core';
 import {ChatService} from './chat.service';
 import {Router} from '@angular/router';
 import { ToastComponent } from '../shared/toast/toast.component';
@@ -9,7 +9,8 @@ import { ToastComponent } from '../shared/toast/toast.component';
     selector: 'chat',
     templateUrl: './chat.component.html'
 })
-export class ChatComponent {
+export class ChatComponent implements OnInit, AfterViewChecked{
+  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
   chats: any;
   room: any = 'all';
   currentuser: any;
@@ -39,6 +40,21 @@ export class ChatComponent {
   }
 
 
+    ngOnInit() {
+        this.scrollToBottom();
+    }
+
+    ngAfterViewChecked() {
+        this.scrollToBottom();
+    }
+
+    scrollToBottom(): void {
+        try {
+            this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+        } catch(err) { }
+    }
+
+
   refresh(event) {
     let target = event.target || event.srcElement || event.currentTarget;
     console.log(target);
@@ -55,7 +71,6 @@ export class ChatComponent {
 
 
   ngOnDestroy() {
-     console.log(123);
      this.chatService.users.child(this.userkey).remove();
   }
 
